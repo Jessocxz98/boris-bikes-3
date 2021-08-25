@@ -3,5 +3,5 @@
 | Objects        | Messages     |
 | -------------- | ------------ |
 | Person         |              |
-| Bike           | is_working?  |
+| Bike           | working?     |
 | DockingStation | release_bike |
