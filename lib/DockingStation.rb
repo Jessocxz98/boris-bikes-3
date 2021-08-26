@@ -18,7 +18,7 @@ class DockingStation
 
   def dock(bike)
     @bike = bike
-    if @available.length >= 1
+    if @available.length >= 20
       raise "This docking station is full"
     else
       @available.push(@bike)
