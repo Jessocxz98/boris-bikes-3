@@ -29,7 +29,7 @@ describe DockingStation do
 
   it 'doesnt accept more bikes than capacity' do
     bike = Bike.new
-    20.times do |n|
+    DockingStation::DEFAULT_CAPACITY.times do |n|
       subject.dock(n)
     end
     expect { subject.dock(bike) }.to raise_error "This docking station is full"
@@ -40,6 +40,26 @@ describe DockingStation do
     bike2 = Bike.new
     subject.dock(bike)
     expect subject.dock(bike2) == bike2
+  end
+
+  it 'has a default capacity' do
+    expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
+  describe 'initialization' do
+    subject { DockingStation.new }
+    let(:bike) { Bike.new }
+    it 'defaults capacity' do
+      described_class::DEFAULT_CAPACITY.times do
+        subject.dock(bike)
+      end
+    end
+
+    it 'has a variable capacity' do
+      docking_station = DockingStation.new(50)
+      50.times { docking_station.dock Bike.new }
+      expect{ docking_station.dock Bike.new }.to raise_error 'This docking station is full'
+    end
   end
 
 end
